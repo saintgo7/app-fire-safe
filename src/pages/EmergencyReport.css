@@ -1,0 +1,93 @@
+.emergency-report {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.emergency-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.emergency-header h2 {
+  color: #dc3545;
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.emergency-actions {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.call-119 {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 20px 40px;
+  font-size: 1.2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  animation: pulse 2s infinite;
+}
+
+.call-119:hover {
+  background-color: #c82333;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.emergency-form {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #dc3545;
+}
+
+.submit-button {
+  width: 100%;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 1rem;
+  font-size: 1.1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.submit-button:hover {
+  background-color: #c82333;
+}
