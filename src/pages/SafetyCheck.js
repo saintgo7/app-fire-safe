@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import storageService from '../services/storageService';
+import { validateSafetyCheck, sanitizeInput } from '../utils/validation';
 import './SafetyCheck.css';
 
 function SafetyCheck() {
@@ -12,21 +14,62 @@ function SafetyCheck() {
   ]);
 
   const [notes, setNotes] = useState('');
+  const [errors, setErrors] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleCheckChange = (id) => {
-    setChecklist(prev => 
-      prev.map(item => 
+    setChecklist(prev =>
+      prev.map(item =>
         item.id === id ? { ...item, checked: !item.checked } : item
       )
     );
   };
 
   const handleSubmit = () => {
+    setIsSubmitting(true);
+    setErrors({});
+
     const completedItems = checklist.filter(item => item.checked).length;
     const totalItems = checklist.length;
-    const percentage = Math.round((completedItems / totalItems) * 100);
-    
-    alert(`안전 점검 완료!\n점검률: ${percentage}%\n완료 항목: ${completedItems}/${totalItems}`);
+    const completionRate = Math.round((completedItems / totalItems) * 100);
+
+    const checkData = {
+      checklist,
+      notes,
+      completionRate,
+      completedItems,
+      totalItems
+    };
+
+    // 검증
+    const validation = validateSafetyCheck(checkData);
+
+    if (!validation.isValid) {
+      setErrors(validation.errors);
+      setIsSubmitting(false);
+      alert('입력 내용을 확인해주세요.');
+      return;
+    }
+
+    try {
+      // 데이터 저장
+      const sanitizedData = {
+        ...checkData,
+        notes: sanitizeInput(notes)
+      };
+
+      const savedCheck = storageService.saveSafetyCheck(sanitizedData);
+
+      alert(`안전 점검 완료!\n\n점검 번호: ${savedCheck.id}\n점검률: ${completionRate}%\n완료 항목: ${completedItems}/${totalItems}\n\n점검 기록이 저장되었습니다.`);
+
+      // 폼 초기화
+      setChecklist(prev => prev.map(item => ({ ...item, checked: false })));
+      setNotes('');
+    } catch (error) {
+      alert('안전 점검 저장 중 오류가 발생했습니다. 다시 시도해주세요.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const completedCount = checklist.filter(item => item.checked).length;
@@ -77,12 +120,16 @@ function SafetyCheck() {
           onChange={(e) => setNotes(e.target.value)}
           placeholder="점검 중 발견한 문제점이나 특이사항을 기록하세요..."
           rows="4"
+          className={errors.notes ? 'input-error' : ''}
+          maxLength="2000"
         />
+        {errors.notes && <span className="error-message">{errors.notes}</span>}
+        <div className="char-count">{notes.length}/2000</div>
       </div>
 
       <div className="submit-section">
-        <button onClick={handleSubmit} className="submit-button">
-          점검 완료 보고
+        <button onClick={handleSubmit} className="submit-button" disabled={isSubmitting}>
+          {isSubmitting ? '저장 중...' : '점검 완료 보고'}
         </button>
       </div>
     </div>

@@ -31,7 +31,9 @@ function Home() {
           <div className="feature-card">
             <h3>📊 통계 및 분석</h3>
             <p>안전 현황을 분석하고 개선 방안을 확인하세요</p>
-            <button className="info-button">통계 보기</button>
+            <Link to="/statistics" className="info-button">
+              통계 보기
+            </Link>
           </div>
         </div>
       </section>

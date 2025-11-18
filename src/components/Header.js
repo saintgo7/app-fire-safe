@@ -13,6 +13,7 @@ function Header() {
           <Link to="/" className="nav-link">홈</Link>
           <Link to="/emergency" className="nav-link">긴급신고</Link>
           <Link to="/safety-check" className="nav-link">안전점검</Link>
+          <Link to="/statistics" className="nav-link">통계</Link>
         </nav>
       </div>
     </header>

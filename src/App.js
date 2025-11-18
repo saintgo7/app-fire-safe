@@ -4,6 +4,7 @@ import Header from './components/Header';
 import Home from './pages/Home';
 import EmergencyReport from './pages/EmergencyReport';
 import SafetyCheck from './pages/SafetyCheck';
+import Statistics from './pages/Statistics';
 import './App.css';
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/emergency" element={<EmergencyReport />} />
             <Route path="/safety-check" element={<SafetyCheck />} />
+            <Route path="/statistics" element={<Statistics />} />
           </Routes>
         </main>
       </div>
