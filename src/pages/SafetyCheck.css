@@ -1,75 +1,149 @@
 .safety-check {
-  max-width: 800px;
+  max-width: 850px;
   margin: 0 auto;
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .safety-header {
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
 }
 
 .safety-header h2 {
-  color: #28a745;
-  font-size: 2rem;
-  margin-bottom: 0.5rem;
+  font-size: 2.5rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #51cf66 0%, #37b24d 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.8rem;
+  letter-spacing: -0.5px;
+}
+
+.safety-header p {
+  color: #4a5568;
+  font-size: 1.1rem;
+  font-weight: 500;
 }
 
 .progress-section {
   background: white;
-  padding: 1.5rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-  margin-bottom: 2rem;
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+  margin-bottom: 2.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  transition: all 0.3s ease;
+}
+
+.progress-section:hover {
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.12);
+  transform: translateY(-2px);
 }
 
 .progress-section h3 {
-  margin-bottom: 1rem;
-  color: #333;
+  margin-bottom: 1.3rem;
+  color: #2d3748;
+  font-size: 1.3rem;
+  font-weight: 700;
 }
 
 .progress-bar {
   width: 100%;
-  height: 20px;
-  background-color: #e9ecef;
-  border-radius: 10px;
+  height: 28px;
+  background: linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%);
+  border-radius: 14px;
   overflow: hidden;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.8rem;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
 }
 
 .progress-fill {
   height: 100%;
-  background-color: #28a745;
-  transition: width 0.3s ease;
+  background: linear-gradient(135deg, #51cf66 0%, #37b24d 100%);
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 8px rgba(55, 178, 77, 0.4);
+  position: relative;
+}
+
+.progress-fill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.progress-section p {
+  color: #4a5568;
+  font-weight: 600;
+  font-size: 1.1rem;
 }
 
 .checklist-section {
   background: white;
-  padding: 1.5rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-  margin-bottom: 2rem;
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+  margin-bottom: 2.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.5);
 }
 
 .checklist-section h3 {
-  margin-bottom: 1rem;
-  color: #333;
+  margin-bottom: 1.5rem;
+  color: #2d3748;
+  font-size: 1.3rem;
+  font-weight: 700;
 }
 
 .checklist-item {
-  padding: 1rem;
-  border-bottom: 1px solid #eee;
+  padding: 1.3rem;
+  border-radius: 12px;
+  margin-bottom: 0.8rem;
+  background: linear-gradient(135deg, #f8f9fa 0%, #f1f3f5 100%);
+  transition: all 0.3s ease;
+  border-left: 4px solid transparent;
+}
+
+.checklist-item:hover {
+  background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+  border-left-color: #51cf66;
+  transform: translateX(5px);
+  box-shadow: 0 4px 12px rgba(81, 207, 102, 0.2);
 }
 
 .checklist-item:last-child {
-  border-bottom: none;
+  margin-bottom: 0;
 }
 
 .checkbox-label {
   display: flex;
   align-items: center;
   cursor: pointer;
-  font-size: 1rem;
-  color: #333;
+  font-size: 1.05rem;
+  color: #2d3748;
+  font-weight: 500;
+  user-select: none;
 }
 
 .checkbox-label input[type="checkbox"] {
@@ -77,17 +151,32 @@
 }
 
 .checkmark {
-  width: 20px;
-  height: 20px;
-  border: 2px solid #28a745;
-  border-radius: 3px;
-  margin-right: 1rem;
+  width: 26px;
+  height: 26px;
+  border: 3px solid #51cf66;
+  border-radius: 8px;
+  margin-right: 1.2rem;
   position: relative;
   flex-shrink: 0;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: white;
+}
+
+.checkbox-label:hover .checkmark {
+  border-color: #37b24d;
+  transform: scale(1.1);
 }
 
 .checkbox-label input[type="checkbox"]:checked + .checkmark {
-  background-color: #28a745;
+  background: linear-gradient(135deg, #51cf66 0%, #37b24d 100%);
+  border-color: #37b24d;
+  animation: checkBounce 0.4s ease;
+}
+
+@keyframes checkBounce {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
 }
 
 .checkbox-label input[type="checkbox"]:checked + .checkmark:after {
@@ -97,34 +186,52 @@
   left: 50%;
   transform: translate(-50%, -50%);
   color: white;
-  font-weight: bold;
+  font-weight: 900;
+  font-size: 18px;
+  animation: checkPop 0.3s ease;
+}
+
+@keyframes checkPop {
+  0% { opacity: 0; transform: translate(-50%, -50%) scale(0); }
+  50% { transform: translate(-50%, -50%) scale(1.3); }
+  100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
 }
 
 .notes-section {
   background: white;
-  padding: 1.5rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-  margin-bottom: 2rem;
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+  margin-bottom: 2.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.5);
 }
 
 .notes-section h3 {
-  margin-bottom: 1rem;
-  color: #333;
+  margin-bottom: 1.3rem;
+  color: #2d3748;
+  font-size: 1.3rem;
+  font-weight: 700;
 }
 
 .notes-section textarea {
   width: 100%;
-  padding: 0.75rem;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  padding: 1rem 1.2rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
   font-size: 1rem;
   resize: vertical;
+  min-height: 120px;
+  transition: all 0.3s ease;
+  background-color: #f8f9fa;
+  font-family: inherit;
 }
 
 .notes-section textarea:focus {
   outline: none;
-  border-color: #28a745;
+  border-color: #51cf66;
+  background-color: #fff;
+  box-shadow: 0 0 0 4px rgba(81, 207, 102, 0.1);
+  transform: translateY(-1px);
 }
 
 .submit-section {
@@ -132,40 +239,91 @@
 }
 
 .submit-button {
-  background-color: #28a745;
+  background: linear-gradient(135deg, #51cf66 0%, #37b24d 100%);
   color: white;
   border: none;
-  padding: 1rem 2rem;
-  font-size: 1.1rem;
-  border-radius: 4px;
+  padding: 1.2rem 3rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  border-radius: 12px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(55, 178, 77, 0.3);
 }
 
 .submit-button:hover:not(:disabled) {
-  background-color: #218838;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(55, 178, 77, 0.4);
+  background: linear-gradient(135deg, #37b24d 0%, #51cf66 100%);
+}
+
+.submit-button:active:not(:disabled) {
+  transform: translateY(0);
 }
 
 .submit-button:disabled {
-  background-color: #999;
+  background: linear-gradient(135deg, #cbd5e0 0%, #a0aec0 100%);
   cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
 }
 
 .input-error {
-  border-color: #dc3545 !important;
-  background-color: #fff5f5;
+  border-color: #fc8181 !important;
+  background-color: #fff5f5 !important;
+  animation: shake 0.4s;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-4px); }
+  20%, 40%, 60%, 80% { transform: translateX(4px); }
 }
 
 .error-message {
-  display: block;
-  color: #dc3545;
-  font-size: 0.875rem;
-  margin-top: 0.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: #e53e3e;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+  font-weight: 600;
+}
+
+.error-message::before {
+  content: "⚠️";
+  font-size: 1rem;
 }
 
 .char-count {
   text-align: right;
-  font-size: 0.875rem;
-  color: #6c757d;
-  margin-top: 0.25rem;
+  font-size: 0.9rem;
+  color: #718096;
+  margin-top: 0.6rem;
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .safety-check {
+    padding: 0 1rem;
+  }
+
+  .safety-header h2 {
+    font-size: 2rem;
+  }
+
+  .progress-section,
+  .checklist-section,
+  .notes-section {
+    padding: 1.5rem;
+  }
+
+  .checklist-item {
+    padding: 1rem;
+  }
+
+  .submit-button {
+    padding: 1rem 2rem;
+    width: 100%;
+  }
 }
